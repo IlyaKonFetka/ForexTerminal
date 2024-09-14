@@ -72,8 +72,10 @@ public class Controller {
             return null;
         }
         if (command instanceof MonetaryTransaction){
-            user.addTransaction(((MonetaryTransaction) command).makeKeyPhrase(parameters));
-            terminal.updateCurrencyRates();
+            if (response.status()){
+                user.addTransaction(((MonetaryTransaction) command).makeKeyPhrase(parameters));
+                terminal.updateCurrencyRates();
+            }
         }
         return response;
     }
